@@ -4,14 +4,16 @@ import Overview from "./components/Overview";
 export default class App extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { tasks: []}
+    this.state = { tasks: [] }
   }
 
-  addTask() {
+  addTask = () => {
     let newTask = document.querySelector('input').value
-    this.setState(oldTasks => ({
-      tasks: [...oldTasks, newTask]
-    }))
+    let newKey = newTask.slice(0,3) + Math.floor(Math.random() * 10 + 0).toString()
+    let newList = [...this.state.tasks, {name: newTask, key: newKey}]
+    this.setState({
+      tasks: newList
+    })
   }
 
   render() {
@@ -19,7 +21,7 @@ export default class App extends React.Component {
       <div className="App">
         <div>
           <input type="text"></input>
-          <button onClick={this.addTask}>add task</button>
+          <button type="button" onClick={this.addTask}>add task</button>
         </div>
         <Overview tasks={this.state.tasks} />
       </div>
