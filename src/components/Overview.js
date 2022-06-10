@@ -1,4 +1,6 @@
-export default class Overview {
+import React from "react"
+
+export default class Overview extends React.Component {
     constructor(props) {
         super(props)
         this.state = { tasks: props.tasks }
@@ -8,7 +10,7 @@ export default class Overview {
         return (
             <div>
                 <ul>
-                    
+
                 </ul>
             </div>
         )
