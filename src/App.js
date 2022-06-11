@@ -4,15 +4,16 @@ import Overview from "./components/Overview";
 export default class App extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { tasks: [] }
+    this.state = { tasks: [], counter: 0 }
   }
 
   addTask = () => {
     let newTask = document.querySelector('input').value
     let newKey = newTask.slice(0,3) + Math.floor(Math.random() * 1000 + 0).toString()
-    let newList = [...this.state.tasks, {name: newTask, key: newKey}]
+    let newList = [...this.state.tasks, {name: newTask, key: newKey, count: this.state.counter}]
     this.setState({
-      tasks: newList
+      tasks: newList,
+      counter: this.state.counter + 1
     })
   }
 
