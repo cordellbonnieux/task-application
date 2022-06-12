@@ -4,6 +4,11 @@ export default class Overview extends React.Component {
     constructor(props) {
         super(props)
         this.state = { banned: [], tasks: this.props.tasks }
+        /*
+        this.delete = this.delete.bind(this)
+        this.edit = this.edit.bind(this)
+        this.save = this.save.bind(this)
+        */
     }
 
     delete = (key) => {
@@ -25,11 +30,11 @@ export default class Overview extends React.Component {
     }
 
     // passing name as param does not work
-    save = (key, name) => {
+    save = (key) => {
+        let name = null   //this needs to be input.value
         let arr = this.state.tasks
         for (let i = 0; i < arr.length; i++) {
             if (arr[i].key === key) {
-                console.log(name)
                 arr[i].name = name
                 arr[i].editing = false 
                 this.setState({
@@ -40,14 +45,14 @@ export default class Overview extends React.Component {
     }
 
     render() {
-        const list = this.state.tasks.map(task => {
-
+        const items = this.props.tasks // displays when props, though only editable when state?
+        const list = items.map(task => {
             const name = task.editing ? 
-                <input type="text" id={task.key}></input> : 
+                <input type="text" id={task.key}></input> : // here is the input
                 <span>{task.name + '  (' + task.count + ')'}</span>
 
             const edit = task.editing ? 
-                <button type="text" onClick={() => this.save(task.key, name.value)}>save</button> : 
+                <button type="text" onClick={() => this.save(task.key)}>save</button> : 
                 <button type="button" onClick={() => this.edit(task.key)}>edit</button>
 
             if (!this.state.banned.includes(task.key)) {

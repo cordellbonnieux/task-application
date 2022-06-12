@@ -5,6 +5,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = { tasks: [], counter: 0 }
+    this.addTask = this.addTask.bind(this) // is this nessesary?
   }
 
   addTask = () => {
