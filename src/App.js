@@ -10,7 +10,7 @@ export default class App extends React.Component {
   addTask = () => {
     let newTask = document.querySelector('input').value
     let newKey = newTask.slice(0,3) + Math.floor(Math.random() * 1000 + 0).toString()
-    let newList = [...this.state.tasks, {name: newTask, key: newKey, count: this.state.counter}]
+    let newList = [...this.state.tasks, {name: newTask, key: newKey, count: this.state.counter, editing: false}]
     this.setState({
       tasks: newList,
       counter: this.state.counter + 1
