@@ -13,9 +13,9 @@ export default class Overview extends React.Component {
     }
 
     edit = (key) => {
-        for (let i = 0; i < this.state.tasks.length; i++) {
-            if (this.state.tasks[i].key === key) {
-                let arr = this.state.tasks
+        let arr = this.state.tasks
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].key === key) {
                 arr[i].editing = true
                 this.setState({
                     tasks: arr
@@ -24,8 +24,19 @@ export default class Overview extends React.Component {
         }
     }
 
-    save = (key) => {
-
+    // passing name as param does not work
+    save = (key, name) => {
+        let arr = this.state.tasks
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].key === key) {
+                console.log(name)
+                arr[i].name = name
+                arr[i].editing = false 
+                this.setState({
+                    tasks: arr
+                })
+            }
+        }
     }
 
     render() {
@@ -36,7 +47,7 @@ export default class Overview extends React.Component {
                 <span>{task.name + '  (' + task.count + ')'}</span>
 
             const edit = task.editing ? 
-                <button type="text" onClick={() => this.save(task.key)}>save</button> : 
+                <button type="text" onClick={() => this.save(task.key, name.value)}>save</button> : 
                 <button type="button" onClick={() => this.edit(task.key)}>edit</button>
 
             if (!this.state.banned.includes(task.key)) {
