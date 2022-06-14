@@ -4,7 +4,10 @@ import Overview from "./components/Overview";
 export default class App extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { tasks: [], counter: 0 }
+    this.state = { 
+      tasks: [{name: null, key: null, count: null, editing: null}], 
+      counter: 0 
+    }
     this.addTask = this.addTask.bind(this)
     this.removeTask = this.removeTask.bind(this)
     this.input = React.createRef()

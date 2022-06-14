@@ -45,6 +45,7 @@ export default class Overview extends React.Component {
     render() {
          // displays when props, though only editable when state?
         const list = this.state.tasks.map(task => {
+            if (task.name === null) return null
             const n = task.editing ? 
                 <input type="text" id={task.key}></input> : // here is the input
                 <span>{task.name + '  (' + task.count + ')'}</span>
