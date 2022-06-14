@@ -3,14 +3,11 @@ import React from "react"
 export default class Overview extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { banned: [], tasks: this.props.tasks }
-        /*
-        this.delete = this.delete.bind(this)
-        this.edit = this.edit.bind(this)
-        this.save = this.save.bind(this)
-        */
+        this.state = { tasks: this.props.tasks }
+        this.remove = this.props.remove
     }
 
+    /*
     delete = (key) => {
         this.setState({
             banned: [...this.state.banned, key]
@@ -43,27 +40,25 @@ export default class Overview extends React.Component {
             }
         }
     }
+    */
 
     render() {
-        const items = this.props.tasks // displays when props, though only editable when state?
-        const list = items.map(task => {
-            const name = task.editing ? 
+         // displays when props, though only editable when state?
+        const list = this.state.tasks.map(task => {
+            const n = task.editing ? 
                 <input type="text" id={task.key}></input> : // here is the input
                 <span>{task.name + '  (' + task.count + ')'}</span>
 
-            const edit = task.editing ? 
+            const e = task.editing ? 
                 <button type="text" onClick={() => this.save(task.key)}>save</button> : 
                 <button type="button" onClick={() => this.edit(task.key)}>edit</button>
 
-            if (!this.state.banned.includes(task.key)) {
-                return <li key={task.key}>
-                    {name}
-                    {edit}
-                    <button type="button" onClick={() => this.delete(task.key)}>delete</button>
-                </li>
-            } else {
-                return null
-            }
+
+            return <li key={task.key}>
+                {n}
+                {e}
+                <button type="button" onClick={() => this.remove(task.key)}>delete</button>
+            </li>
         })
         return (
             <div>
